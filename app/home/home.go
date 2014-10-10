@@ -3,8 +3,10 @@ package home
 import (
     "net/http"
     "html/template"
-    
-    "github.com/golang/glog"
+    "encoding/json"
+    "log"
+
+
     "git-go-websiteskeleton/app/common"
 )
 
@@ -22,18 +24,19 @@ func GetHomePage(rw http.ResponseWriter, req *http.Request) {
     common.CheckError(err, 2)
 }
 
+type User struct {
+    Name string `json:"name"`
+    City string `json:"city"`
+}
+
+//test POST request sending data from front-end to back-end
 func GetTestingPost(rw http.ResponseWriter, req *http.Request) {
-    glog.Infoln("asdfadsfadsfadsf")
-
-    type Page struct {
-        Title string
+    log.Println("request")
+    decoder := json.NewDecoder(req.Body)
+    var newUser User
+    errc := decoder.Decode(&newUser)
+    if errc != nil {
+        //panic()
     }
-    
-    p := Page{
-        Title: "test",
-    }
-
-    common.Templates = template.Must(template.ParseFiles("templates/home/home.html", common.LayoutPath))
-    err := common.Templates.ExecuteTemplate(rw, "base", p)
-    common.CheckError(err, 2)
+    log.Println(newUser.City)
 }

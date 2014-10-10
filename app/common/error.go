@@ -3,8 +3,6 @@ package common
 import (
     "log"
     "runtime"
-
-    "github.com/golang/glog"
 )
 
 // 0 = info
@@ -19,15 +17,13 @@ func CheckError(err error, level int) {
 
         switch level {
         case 0:
-            glog.Infoln("%q\n%s\n", err)
+            log.Println("%q\n%s\n", err)
         case 1:
-            glog.Warningln("%q\n%s\n", err)
+            log.Println("%q\n%s\n", err)
         case 2:
-            glog.Errorln("%q\n%s\n", err)
+            log.Println("%q\n%s\n", err)
         case 3:
-            glog.Fatalln("%q\n%s\n", err)
+            log.Println("%q\n%s\n", err)
         }
-
-        glog.Flush()
     }
 }

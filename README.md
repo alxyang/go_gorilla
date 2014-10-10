@@ -11,21 +11,10 @@ A basic web application template written in go that comes with the Gorilla Multi
 
 ### Installation ###
 1. cd $GOPATH/src
-2. git clone https://github.com/aly006/go-webapp-boilerplate
+2. git clone https://github.com/aly006/cilantro
 3. cd git-go-websiteskeleton
 4. go run main.go
 5. Navigate to http://localhost:2014
-
-
-### Logging ###
-This project contains access and error logging. By default, these logs will be placed in your system's temp folder (on most *nix machines, this is /tmp; on mac, it's /private/var/gobbledegook). To change the log dir, simply run main with -log_dir="/path/to/dir", as in ./main -log_dir="/path/to/dir". If you decide to change the log location (which I recommend), you are in charge of cleaning your log dir periodically. The program's log library (glog) will handle max file sizes, but multiple logs will not be cleaned automatically.
-
-Some more info on what gets captured:
-- Access logging captures each request served, logging the requestor's IP, the request method, uri, and protocol, the time
-requested, and the page load time.
-- Error logging captures the time, error, and a stack trace.
-
-Note: on *nix systems, you can also set the TMPDIR environment variable to specify default output location.
 
 ### TODO ###
 Add database connectivity
