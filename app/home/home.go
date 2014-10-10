@@ -7,7 +7,7 @@ import (
     "log"
 
 
-    "git-go-websiteskeleton/app/common"
+    "cilantro/app/common"
 )
 
 func GetHomePage(rw http.ResponseWriter, req *http.Request) {
