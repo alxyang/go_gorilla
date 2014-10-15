@@ -1,5 +1,27 @@
-$( document ).ready(function() {
-  console.log( "document loaded" );
+$(function() {
+
+  var conn;
+
+  if (window.WebSocket) {
+    console.log("websockets available");
+    conn = new WebSocket("ws://localhost:8080/ws");
+
+    conn.onopen = function(){
+      /*Send a small message to the console once the connection is established */
+      console.log('Connection open!');
+    };
+
+    conn.onclose = function(){
+      console.log('Connection closed');
+    };
+
+    conn.onerror = function(error){
+      console.log('Error detected: ' + JSON.stringify(error));
+    };
+
+  } else {
+    console.log( "browser does support websockets" );
+  }
 
   //sample GET request to server
   $.get( "/user/777", function( data ) {

@@ -1,25 +1,31 @@
 package main
 
 import (
+    "flag"
     "net/http"
     "time"
-    "flag"
     "log"
 
-    "git-go-websiteskeleton/app/common"
-    "git-go-websiteskeleton/app/home"
-    "git-go-websiteskeleton/app/user"
+    "cilantro/app/common"
+    "cilantro/app/home"
+    "cilantro/app/user"
 
     "github.com/gorilla/mux"
 )
 
+var addr = flag.String("addr", ":8080", "http service address")
 var router *mux.Router
 
 func main() {
     flag.Parse()
 
+    go common.H.Run()
+
+
     router = mux.NewRouter()
     http.HandleFunc("/", httpInterceptor)
+
+    router.HandleFunc("/ws", common.WsHandler)
 
     router.HandleFunc("/", home.GetHomePage).Methods("GET")
     router.HandleFunc("/user{_:/?}", user.GetHomePage).Methods("GET")
@@ -29,11 +35,15 @@ func main() {
 
     router.HandleFunc("/test", home.GetTestingPost).Methods("POST")
 
-    fileServer := http.StripPrefix("/static/", http.FileServer(http.Dir("static")))
-    http.Handle("/static/", fileServer)
+    // fileServer := http.StripPrefix("/static/", http.FileServer(http.Dir("static")))
+    // http.Handle("/static/", fileServer)
+    http.Handle("/static/", http.FileServer(http.Dir(".")))
 
-    log.Println("server started on port 2014.")
-    http.ListenAndServe(":2014", nil)
+    err := http.ListenAndServe(*addr, nil)
+    if err != nil {
+        log.Fatal("ListenAndServe: ", err)
+    }
+    log.Println("server started.")
 }
 
 func httpInterceptor(w http.ResponseWriter, req *http.Request) {
@@ -50,5 +60,6 @@ func httpInterceptor(w http.ResponseWriter, req *http.Request) {
         common.LogAccess(w, req, elapsedTime)
     case "POST":
         // here we might use http.StatusCreated
+         common.LogAccess(w, req, elapsedTime)
     }
 }
