@@ -33,9 +33,9 @@ $(function() {
     var log = $("#log");
 
     function appendLog(msg) {
-        var d = log[0]
+        var d = log[0];
         var doScroll = d.scrollTop == d.scrollHeight - d.clientHeight;
-        msg.appendTo(log)
+        msg.appendTo(log);
         if (doScroll) {
             d.scrollTop = d.scrollHeight - d.clientHeight;
         }
@@ -48,12 +48,21 @@ $(function() {
         if (!msg.val()) {
             return false;
         }
+        
         conn.send(msg.val());
+        msg.val("");
+        return false;
+    });
+
+    $("#form2").submit(function() {
+        if (!conn) {
+            return false;
+        }
+
+        conn.send("testing");
         msg.val("");
         return false
     });
-
-
 
   //sample GET request to server
   $.get( "/user/777", function( data ) {

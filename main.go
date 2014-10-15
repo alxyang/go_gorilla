@@ -7,6 +7,7 @@ import (
     "log"
 
     "cilantro/app/common"
+    "cilantro/app/hardware"
     "cilantro/app/home"
     "cilantro/app/user"
 
@@ -19,31 +20,29 @@ var router *mux.Router
 func main() {
     flag.Parse()
 
-    go common.H.Run()
+    go hardware.H.Run()
 
 
     router = mux.NewRouter()
     http.HandleFunc("/", httpInterceptor)
 
-    router.HandleFunc("/ws", common.WsHandler)
-
+    router.HandleFunc("/ws", hardware.WsHandler)
     router.HandleFunc("/", home.GetHomePage).Methods("GET")
     router.HandleFunc("/user{_:/?}", user.GetHomePage).Methods("GET")
-
     router.HandleFunc("/user/view/{id:[0-9]+}", user.GetViewPage).Methods("GET")
     router.HandleFunc("/user/{id:[0-9]+}", user.GetViewPage).Methods("GET")
-
     router.HandleFunc("/test", home.GetTestingPost).Methods("POST")
 
     // fileServer := http.StripPrefix("/static/", http.FileServer(http.Dir("static")))
     // http.Handle("/static/", fileServer)
     http.Handle("/static/", http.FileServer(http.Dir(".")))
 
+    log.Println("Attempting to start web server.")
     err := http.ListenAndServe(*addr, nil)
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
     }
-    log.Println("server started.")
+    
 }
 
 func httpInterceptor(w http.ResponseWriter, req *http.Request) {

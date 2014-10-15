@@ -1,4 +1,4 @@
-package common
+package hardware
 
 import(
   "log"
@@ -26,7 +26,7 @@ var H = Hub{
 }
 
 func (h *Hub) Run() {
-  log.Println("entered hub run");
+  log.Println("Websocket hub is running.");
   for {
     select {
     case c := <-h.register:
