@@ -13,15 +13,47 @@ $(function() {
 
     conn.onclose = function(){
       console.log('Connection closed');
+      appendLog($("<div><b>Connection closed.</b></div>"));
     };
 
     conn.onerror = function(error){
       console.log('Error detected: ' + JSON.stringify(error));
     };
 
+    conn.onmessage = function(evt) {
+      // console.log(evt.data);
+      appendLog($("<div/>").text(evt.data));
+    };
+
   } else {
     console.log( "browser does support websockets" );
   }
+
+    var msg = $("#msg");
+    var log = $("#log");
+
+    function appendLog(msg) {
+        var d = log[0]
+        var doScroll = d.scrollTop == d.scrollHeight - d.clientHeight;
+        msg.appendTo(log)
+        if (doScroll) {
+            d.scrollTop = d.scrollHeight - d.clientHeight;
+        }
+    }
+
+    $("#form").submit(function() {
+        if (!conn) {
+            return false;
+        }
+        if (!msg.val()) {
+            return false;
+        }
+        conn.send(msg.val());
+        msg.val("");
+        return false
+    });
+
+
 
   //sample GET request to server
   $.get( "/user/777", function( data ) {
