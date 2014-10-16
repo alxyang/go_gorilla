@@ -7,6 +7,7 @@ A basic web application template written in go that comes with the Gorilla Multi
 1. A go environment http://golang.org/doc/install#install
 2. Gorilla mux: go get github.com/gorilla/mux (http://www.gorillatoolkit.org/pkg/mux)
 3. Gorilla websocket: go get github.com/gorilla/websocket (http://www.gorillatoolkit.org/pkg/websocket)
+4. Motion Controller: go get "github.com/dmdcilantro/hardware/nivisa"
 
 ### Installation ###
 1. cd $GOPATH/src
