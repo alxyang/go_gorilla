@@ -1,21 +1,16 @@
 Go Template
 ===============
 
-A basic web application template written in go that comes with the Gorilla Multiplexer for routing, glog for access and error logging, as well as jquery, bootstrap, and font-awesome.
+A basic web application template written in go that comes with the Gorilla Multiplexer for routing and Gorilla Websocket for Websockets functionality, as well as jquery, bootstrap, and font-awesome.
 
-### Prerequisites ###
-1. A go environment http://golang.org/doc/install#install
-2. Gorilla mux: go get github.com/gorilla/mux (http://www.gorillatoolkit.org/pkg/mux)
-3. Gorilla websocket: go get github.com/gorilla/websocket (http://www.gorillatoolkit.org/pkg/websocket)
-4. Motion Controller: go get "github.com/dmdcilantro/hardware/nivisa"
+### Prerequisites
+1. A go environment [http://golang.org/](http://golang.org/)
+2. Gorilla mux: `go get github.com/gorilla/mux`
+3. Gorilla websocket: `go get github.com/gorilla/websocket`
 
-### Installation ###
-1. cd $GOPATH/src
-2. git clone https://github.com/aly006/cilantro
-3. cd cilantro
-4. go run main.go
-5. Navigate to http://localhost:8080
-
-### TODO ###
-Add database connectivity
-Possibly convert to Angular, may be overkill.
+### Installation
+1. `cd $GOPATH/src`
+2. `git clone https://github.com/aly006/go_gorilla`
+3. `cd go_gorilla`
+4. `go run main.go`
+5. Navigate to [http://localhost:8080](http://localhost:8080)
