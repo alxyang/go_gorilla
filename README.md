@@ -1,7 +1,7 @@
-Go Template
+Go Gorilla Template
 ===============
 
-A basic web application template written in go that comes with the Gorilla Multiplexer for routing and Gorilla Websocket for Websockets functionality, as well as jquery, bootstrap, and font-awesome.
+A basic web application starter written in Go that comes with the Gorilla Multiplexer for routing and Gorilla Websocket for Websockets functionality, as well as jquery, bootstrap, and font-awesome.
 
 ### Prerequisites
 1. A go environment [http://golang.org/](http://golang.org/)
